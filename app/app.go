@@ -3,8 +3,8 @@ package app
 import (
 	"fmt"
 
-	"github.com/Erikaa81/gotransferencia/config"
-	"github.com/Erikaa81/gotransferencia/db"
+	"github.com/Erikaa81/Banco-api/config"
+	"github.com/Erikaa81/Banco-api/db"
 	"github.com/go-playground/locales/pt_BR"
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"

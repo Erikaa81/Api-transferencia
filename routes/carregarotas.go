@@ -1,10 +1,10 @@
 package routes
 
 import (
-	"github.com/Erikaa81/gotransferencia/app"
-	"github.com/Erikaa81/gotransferencia/controllers/Accounts"
-	transfer "github.com/Erikaa81/gotransferencia/controllers/Transfer"
-	"github.com/Erikaa81/gotransferencia/controllers/login"
+	"github.com/Erikaa81/Banco-api/app"
+	"github.com/Erikaa81/Banco-api/controllers/Accounts"
+	transfer "github.com/Erikaa81/Banco-api/controllers/Transfer"
+	"github.com/Erikaa81/Banco-api/controllers/login"
 	"github.com/gorilla/mux"
 	"github.com/urfave/negroni"
 )

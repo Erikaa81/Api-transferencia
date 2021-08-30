@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Erikaa81/gotransferencia/app"
-	"github.com/Erikaa81/gotransferencia/models"
+	"github.com/Erikaa81/Banco-api/app"
+	"github.com/Erikaa81/Banco-api/models"
 	"github.com/dgrijalva/jwt-go"
 )
 

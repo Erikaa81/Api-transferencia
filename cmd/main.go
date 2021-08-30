@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/Erikaa81/gotransferencia/app"
-	"github.com/Erikaa81/gotransferencia/controllers/exit"
-	"github.com/Erikaa81/gotransferencia/controllers/logger"
-	"github.com/Erikaa81/gotransferencia/controllers/server"
-	"github.com/Erikaa81/gotransferencia/models"
-	"github.com/Erikaa81/gotransferencia/routes"
+	"github.com/Erikaa81/Banco-api/app"
+	"github.com/Erikaa81/Banco-api/controllers/exit"
+	"github.com/Erikaa81/Banco-api/controllers/logger"
+	"github.com/Erikaa81/Banco-api/controllers/server"
+	"github.com/Erikaa81/Banco-api/models"
+	"github.com/Erikaa81/Banco-api/routes"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )

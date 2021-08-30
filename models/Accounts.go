@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Erikaa81/gotransferencia/app"
-	"github.com/Erikaa81/gotransferencia/controllers/secret"
+	"github.com/Erikaa81/Banco-api/app"
+	"github.com/Erikaa81/Banco-api/controllers/secret"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )

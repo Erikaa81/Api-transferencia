@@ -5,21 +5,21 @@ services:
     build: ./Dockerfile
     image: postgres:12.0
     restart: on-failure
-    container_name: gotransferencia_db
+    container_name: Banco-api_db
     env_file:
       - .env
     ports:
       - "80:80"
     volumes:
-      - gotransferencia-volume:/var/lib/postgresql/data
+      - Banco-api-volume:/var/lib/postgresql/data
     networks:
-      - gotransferencia-network
+      - Banco-api-network
 
   web:
     build:
       context: .
 
-    container_name: gotransferencia_api
+    container_name: Banco-api_api
     env_file:
       - .env
     ports:
@@ -29,4 +29,4 @@ services:
     volumes:
       - ./:/opt/app
     networks:
-      - gotransferencia-network
+      - Banco-api-network

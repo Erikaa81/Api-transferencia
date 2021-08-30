@@ -53,12 +53,10 @@ created_at
 
 GET /transfers - obtém a lista de transferencias da usuaria autenticada.
 POST /transfers - faz transferencia de uma Account para outra.
-Regras para esta rota
 
-# Quem fizer a transferência precisa estar autenticada.
+# Regras para esta rota
 
-# O account_origin_id deve ser obtido no Token enviado.
-
-# Caso Account de origem não tenha saldo, retornar um código de erro apropriado
-
-# Atualizar o balance das contas
+Quem fizer a transferência precisa estar autenticada.
+O account_origin_id deve ser obtido no Token enviado.
+Caso Account de origem não tenha saldo, retornar um código de erro apropriado
+Atualizar o balance das contas.
