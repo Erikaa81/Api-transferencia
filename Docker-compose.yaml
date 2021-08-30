@@ -1,0 +1,32 @@
+version: "2.0"
+
+services:
+  db :
+    build: ./Dockerfile
+    image: postgres:12.0
+    restart: on-failure
+    container_name: gotransferencia_db
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+    volumes:
+      - gotransferencia-volume:/var/lib/postgresql/data
+    networks:
+      - gotransferencia-network
+
+  web:
+    build:
+      context: .
+
+    container_name: gotransferencia_api
+    env_file:
+      - .env
+    ports:
+      - "8080"
+    depends_on:
+      - db
+    volumes:
+      - ./:/opt/app
+    networks:
+      - gotransferencia-network
