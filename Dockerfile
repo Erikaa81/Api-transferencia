@@ -8,7 +8,7 @@ WORKDIR /app/src/Banco-api
 ENV GOPATH=/app
 
 # copia os arquivos do projeto para o workdir do container
-COPY . /app/src/Banco-api//
+COPY . /app/src/Banco-api/
 
 # execulta o main.go e baixa as dependencias do projeto
 RUN go build main.go
