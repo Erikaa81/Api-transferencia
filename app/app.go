@@ -2,13 +2,12 @@ package app
 
 import (
 	"fmt"
-
+	"github.com/go-playground/locales/en"
 	"github.com/Erikaa81/Banco-api/config"
 	"github.com/Erikaa81/Banco-api/db"
-	"github.com/go-playground/locales/pt_BR"
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
-	br_translations "github.com/go-playground/validator/v10/translations/pt_BR"
+	en_translations "github.com/go-playground/validator/v10/translations/en"
 	"github.com/sirupsen/logrus"
 )
 
@@ -40,10 +39,10 @@ func GetApp() (*App, error) {
 	log := logrus.New()
 	// definindo validator de erros no formato JSON
 	vld := validator.New()
-	br := pt_BR.New()
-	uni := ut.New(br, br)
-	trans, _ := uni.GetTranslator("pt_BR")
-	_ = br_translations.RegisterDefaultTranslations(vld, trans)
+	en := en.New()
+	uni := ut.New(en, en)
+	trans, _ := uni.GetTranslator("en")
+	_ = en_translations.RegisterDefaultTranslations(vld, trans)
 	// definindo configurações de ambiente
 	cfg := config.GetConfig()
 	// definindo conexão com o banco de dados
