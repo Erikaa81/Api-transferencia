@@ -11,7 +11,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-var api app.App
+var api *app.App
 
 func initenv() error {
 	// capturando variáveis de ambiente

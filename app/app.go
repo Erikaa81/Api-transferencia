@@ -7,7 +7,6 @@ import (
 	"github.com/Erikaa81/Banco-api/db"
 	"github.com/go-playground/locales/pt_BR"
 	ut "github.com/go-playground/universal-translator"
-	"github.com/go-playground/validator"
 	"github.com/go-playground/validator/v10"
 	br_translations "github.com/go-playground/validator/v10/translations/pt_BR"
 	"github.com/sirupsen/logrus"
@@ -20,10 +19,6 @@ type App struct {
 	Vld   *validator.Validate
 	Log   *logrus.Logger
 	Trans ut.Translator
-}
-
-func NewApp(DB *db.DB) *App {
-	return &App{DB: DB}
 }
 
 // TranslateErrors traduz os erros de formatos JSON inválidos

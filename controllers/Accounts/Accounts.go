@@ -16,7 +16,7 @@ func ListAccounts(app *app.App) http.HandlerFunc {
 		defer r.Body.Close()
 
 		// capturando accounts no DB
-		var a []models.Account
+		var a []models.Accounts
 		if err := app.DB.Client.Find(&a); err.Error != nil {
 			// caso tenha erro ao procurar no banco retorna 500
 			http.Error(w, "Erro na listagem das contas", http.StatusInternalServerError)
@@ -36,7 +36,7 @@ func PostAccount(app *app.App) http.HandlerFunc {
 		defer r.Body.Close()
 
 		// capturando account no request
-		a := &models.Account{}
+		a := &models.Accounts{}
 		if err := json.NewDecoder(r.Body).Decode(&a); err != nil {
 			// caso tenha erro no decode do request retorna 400
 			http.Error(w, "Formato JSON inválido", http.StatusBadRequest)
@@ -77,7 +77,7 @@ func BalanceAccount(app *app.App) http.HandlerFunc {
 		id := mux.Vars(r)["id"]
 
 		// capturando account no DB
-		a := &models.Account{}
+		a := &models.Accounts{}
 		if err := app.DB.Client.First(&a, &id); err.Error != nil {
 			// caso tenha erro ao procurar no banco retorna 404
 			http.Error(w, "Conta não encontrada", http.StatusNotFound)
