@@ -4,12 +4,13 @@
     // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "Launch Program",
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${fileDirname}, /app/src/Banco-api/cmd/main.go"
+            "program": "${workspaceFolder}\\cmd\\main.go"
     }
     ]
 }
