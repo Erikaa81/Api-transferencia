@@ -1,86 +1,71 @@
 package main
 
 import (
-	"github.com/Erikaa81/Banco-api/app"
+	"encoding/base64"
+	"net/http"
+	"strings"
+
 	"github.com/Erikaa81/Banco-api/controllers/exit"
 	"github.com/Erikaa81/Banco-api/controllers/logger"
 	"github.com/Erikaa81/Banco-api/controllers/server"
-	"github.com/Erikaa81/Banco-api/models"
 	"github.com/Erikaa81/Banco-api/routes"
-	"github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
+
+	"github.com/Erikaa81/Banco-api/app"
 )
 
 var api *app.App
 
-func initenv() error {
-	// capturando variáveis de ambiente
-	viper.SetConfigFile(".env")
-	err := viper.ReadInConfig()
-	if err != nil {
-		logrus.Fatal("Falha ao carregar: ", viper.ConfigFileUsed())
-	}
-	return err
-}
+func HandlerFunc(h http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("WWW-Authenticate", `Basic realm="Restricted"`)
 
-func initapp() error {
-	logrus.Info("Usando arquivo config: ", viper.ConfigFileUsed())
-	// armazenando configurações em um struct app
-	var err error
-	api, err = app.GetApp()
-	if err != nil {
-		logrus.Fatal(err.Error())
-	}
-	return err
-}
+		s := strings.SplitN(r.Header.Get("Authorization"), " ", 2)
+		if len(s) != 2 {
+			http.Error(w, "Not authorized", http.StatusUnauthorized)
+			return
+		}
 
-func initdb() error {
-	// migrando os schemas do DB
-	err := api.DB.Client.AutoMigrate(&models.Accounts{}, &models.Transfer{})
-	if err != nil {
-		logrus.Fatal("Erro na migração dos dados")
-	}
-	return err
-}
+		b, err := base64.StdEncoding.DecodeString(s[1])
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusUnauthorized)
+			return
+		}
 
-func init() {
-	if initenv() == nil {
-		if initapp() == nil {
-			if initdb() == nil {
-				if api.Cfg.GetDebugMode() == "true" {
-					logrus.Warn("Banking rodando em modo Debug")
-				} else {
-					logrus.Warn("Banking rodando em modo Silent")
-				}
+		pair := strings.SplitN(string(b), ":", 2)
+		if len(pair) != 2 {
+			http.Error(w, "Not authorized", http.StatusUnauthorized)
+			return
+		}
+
+		if pair[0] != "username" || pair[1] != "password" {
+			http.Error(w, "Not authorized", http.StatusUnauthorized)
+			return
+		}
+
+		h.ServeHTTP(w, r)
+	}
+}
+	func main() {
+
+		srv := server.
+			GetServer().
+			WithRouter(routes.GetRouter(api)).
+			WithLogger(logger.Error)
+
+		go func() {
+			api.Log.Info("Iniciando servidor na porta ", api.Cfg.GetAPIPort())
+			if err := srv.StartServer(); err != nil {
+				api.Log.Fatal(err.Error())
 			}
-		}
+
+			exit.Init(func() {
+				if err := srv.CloseServer(); err != nil {
+					api.Log.Error(err.Error())
+				}
+
+				if err := api.DB.CloseDB(); err != nil {
+					api.Log.Error(err.Error())
+				}
+			})
+		}()
 	}
-}
-
-func main() {
-
-	defer api.DB.CloseDB()
-
-	srv := server.
-		GetServer().
-		WithAddr(api.Cfg.GetAPIPort()).
-		WithRouter(routes.GetRouter(api)).
-		WithLogger(logger.Error)
-
-	go func() {
-		api.Log.Info("Iniciando servidor na porta ", api.Cfg.GetAPIPort())
-		if err := srv.StartServer(); err != nil {
-			api.Log.Fatal(err.Error())
-		}
-	}()
-
-	exit.Init(func() {
-		if err := srv.CloseServer(); err != nil {
-			api.Log.Error(err.Error())
-		}
-
-		if err := api.DB.CloseDB(); err != nil {
-			api.Log.Error(err.Error())
-		}
-	})
-}

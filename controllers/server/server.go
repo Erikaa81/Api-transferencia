@@ -1,7 +1,7 @@
 package server
 
 import (
-	"errors"
+	errors "errors"
 	"log"
 	"net/http"
 

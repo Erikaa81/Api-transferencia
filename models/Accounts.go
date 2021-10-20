@@ -16,8 +16,8 @@ type Accounts struct {
 	gorm.Model `json:"-"`
 	ID         uuid.UUID                 `gorm:"type:uuid" json:"id"`
 	Name       string                    `json:"name"`
-	Cpf        int                       `gorm "json:"cpf"`
-	Secret     string                    `" json:"secret"`
+	Cpf        int                       `json:"cpf"`
+	Secret     string                    `json:"secret"`
 	Balance    float64                   `json:"balance" validate:"required"`
 	CreatedAt  time.Time                 `json:"created_at"`
 	Transfers  interface{ fmt.Stringer } `json:"-" gorm:"foreignKey:AccountOriginID"`
@@ -39,19 +39,20 @@ func (a *Accounts) CreateAccount(app *app.App) (*Accounts, error) {
 	result := app.DB.Client.Create(account)
 
 	if result.Error != nil {
-		return nil, errors.New("Erro na criação da conta")
+		x := errors.New("Erro na criação da conta")
+		return nil, x
 	}
 
 	return account, nil
 
 }
 
-// BeforeCreate hook do gorm para gerar uuid no create
 func (a *Accounts) BeforeCreate(tx *gorm.DB) (err error) {
 	a.ID = uuid.New()
 	a.Secret, err = secret.HashPassword(a.Secret)
 	if err != nil {
-		return errors.New("Erro ao criptografar senha")
+		x := errors.New("Erro ao criptografar senha")
+		return x
 	}
 	return
 }

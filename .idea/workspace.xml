@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="982b1c4f-1b58-46a9-a1e7-bd888b2db32c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/Transfer/transfer.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/Transfer/transfer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/login/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/login/login.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/server/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Accounts.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/Accounts.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Login.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/Login.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/carregarotas.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/carregarotas.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +33,9 @@
   </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1x180e7xud2PqL87CiJ9NwjQkOD" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />

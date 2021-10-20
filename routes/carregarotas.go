@@ -30,11 +30,11 @@ func GetRouter(app *app.App) *mux.Router {
 
 	// rota Saldo
 	balanceRoutes := mux.NewRouter()
-	routes.Path("/accounts/{account_id}/balance").Handler(common.With(
+	routes.Path("/accounts/{id}/balance").Handler(common.With(
 		negroni.Wrap(balanceRoutes),
 	))
-	balances := balanceRoutes.Path("/accounts/{account_id}/balance").Subrouter()
-	balances.Methods("GET/accounts{account_id}/balance").HandlerFunc(Accounts.BalanceAccount(app))
+	balances := balanceRoutes.Path("/accounts/{id}/balance").Subrouter()
+	balances.Methods("GET").HandlerFunc(Accounts.BalanceAccount(app))
 
 	// rota de login
 	loginRoutes := mux.NewRouter()

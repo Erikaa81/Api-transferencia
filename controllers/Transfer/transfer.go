@@ -52,7 +52,7 @@ func ListTransfers(app *app.App) http.HandlerFunc {
 
 		// capturando transfers no DB
 		a := &models.Accounts{}
-		if err := app.DB.Client.Preload("Transfers").First(&a, "cpf = ?", claims.CPF); err.Error != nil {
+		if err := app.DB.Client.Preload("Transfers").First(&a, "accounts-id = ?", claims.ID); err.Error != nil {
 			// caso tenha erro ao procurar no banco retorna 500
 			http.Error(w, "Erro na listagem das transferências", http.StatusInternalServerError)
 			return
@@ -107,7 +107,7 @@ func PostTransfer(app *app.App) http.HandlerFunc {
 
 		// capturando account no DB
 		a := &models.Accounts{}
-		if err := app.DB.Client.First(&a, "cpf = ?", claims.CPF); err.Error != nil {
+		if err := app.DB.Client.First(&a, "accounts_id = ?", claims.ID); err.Error != nil {
 			// caso tenha erro ao procurar no banco retorna 500
 			http.Error(w, "Erro na criação da transferência", http.StatusInternalServerError)
 			return
