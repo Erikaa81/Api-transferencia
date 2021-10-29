@@ -15,7 +15,7 @@ func HandlerLogin(app *app.App) http.HandlerFunc {
 		auth := strings.SplitN(r.Header.Get("Authorization"), " ", 2)
 
 		if len(auth) != 2 || auth[0] != "Basic" {
-			http.Error(w, "authorization failed", http.StatusUnauthorized)
+			http.Error(w, "autorização falhou", http.StatusUnauthorized)
 			return
 		}
 
@@ -23,7 +23,7 @@ func HandlerLogin(app *app.App) http.HandlerFunc {
 		pair := strings.SplitN(string(payload), ":", 2)
 
 		if len(pair) != 2 || !validate(pair[0], pair[1]) {
-			http.Error(w, "authorization failed", http.StatusUnauthorized)
+			http.Error(w, "autorização falhou", http.StatusUnauthorized)
 			return
 		}
 

@@ -16,7 +16,7 @@ type Accounts struct {
 	gorm.Model `json:"-"`
 	ID         uuid.UUID                 `gorm:"type:uuid" json:"id"`
 	Name       string                    `json:"name"`
-	Cpf        int                       `json:"cpf"`
+	Cpf        string                    `json:"cpf"`
 	Secret     string                    `json:"secret"`
 	Balance    float64                   `json:"balance" validate:"required"`
 	CreatedAt  time.Time                 `json:"created_at"`
@@ -39,8 +39,9 @@ func (a *Accounts) CreateAccount(app *app.App) (*Accounts, error) {
 	result := app.DB.Client.Create(account)
 
 	if result.Error != nil {
-		x := errors.New("Erro na criação da conta")
-		return nil, x
+		erroCriarConta := errors.New("Erro na criação da conta")
+
+		return nil, erroCriarConta
 	}
 
 	return account, nil
@@ -51,8 +52,8 @@ func (a *Accounts) BeforeCreate(tx *gorm.DB) (err error) {
 	a.ID = uuid.New()
 	a.Secret, err = secret.HashPassword(a.Secret)
 	if err != nil {
-		x := errors.New("Erro ao criptografar senha")
-		return x
+		ErroConversãoSenha := errors.New("Erro ao criptografar senha")
+		return ErroConversãoSenha
 	}
 	return
 }

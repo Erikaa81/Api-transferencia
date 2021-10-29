@@ -41,11 +41,11 @@ func (s *Server) WithRouter(router *mux.Router) *Server {
 // StartServer abre a conexão do servidor
 func (s *Server) StartServer() error {
 	if len(s.srv.Addr) == 0 {
-		return errors.New("Server missing address")
+		return errors.New("Endereço ausente no servidor")
 	}
 
 	if s.srv.Handler == nil {
-		return errors.New("Server missing handler")
+		return errors.New("Manipulador ausente no servidor")
 	}
 
 	return s.srv.ListenAndServe()

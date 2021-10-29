@@ -1,5 +1,11 @@
-# Desafio Técnico - Go(lang)
-O desafio é criar uma API de transferencia entre contas Internas de um banco digital.
+# Banco-api
+Banco-api é uma API para algumas rotinas bancarias, como criação de contas, listagem de contas, obter o saldo para uma conta específica e transferencia entre contas internas de um banco digital.
+
+# Requisitos/dependências
+- Dockerfile
+- Docker-compose
+
+# Iniciando
 
 
 # API
@@ -21,7 +27,7 @@ created_at
 
 GET /accounts - obtém a lista de contas
 GET /accounts/{account_id}/balance - obtém o saldo da conta
-POST /accounts - cria uma Account
+POST /accounts - cria uma conta
 Regras para esta rota
 
 balance pode iniciar com 0 ou algum valor para simplificar
@@ -52,7 +58,7 @@ created_at
 # Espera-se as seguintes ações:
 
 GET /transfers - obtém a lista de transferencias da usuaria autenticada.
-POST /transfers - faz transferencia de uma Account para outra.
+POST /transfers - faz transferencia de uma conta para outra.
 
 # Regras para esta rota
 
@@ -60,3 +66,4 @@ Quem fizer a transferência precisa estar autenticada.
 O account_origin_id deve ser obtido no Token enviado.
 Caso Account de origem não tenha saldo, retornar um código de erro apropriado
 Atualizar o balance das contas.
+

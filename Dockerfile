@@ -1,21 +1,34 @@
-# Imagem oficial do golang com suporte a go modules
-FROM golang
-
-# Acessando o diretório de trabalho
-WORKDIR /app/src/Banco-api
-
-# aponta a variavel gopath do go para o diretorio app
-ENV GOPATH=/app
-
-# copia os arquivos do projeto para o workdir do container
-COPY . /app/src/Banco-api/
-
-# execulta o main.go e baixa as dependencias do projeto
-RUN go build main.go
+FROM golang:latest
+RUN mkdir /app
+COPY . /app
+WORKDIR /app
+RUN go build -o build/api cmd/main.go
+EXPOSE 3000
+CMD ["/app/build/api"]
 
 
-# Habilitando a API
-CMD ./main
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
