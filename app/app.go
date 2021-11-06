@@ -2,8 +2,7 @@ package app
 
 import (
 	"fmt"
-	"github.com/Erikaa81/Banco-api/config"
-	"github.com/Erikaa81/Banco-api/db"
+
 	"github.com/go-playground/locales/pt_BR"
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
@@ -13,8 +12,6 @@ import (
 
 // App armazena configurações usadas em toda a API
 type App struct {
-	DB    *db.DB
-	Cfg   *config.Config
 	Vld   *validator.Validate
 	Log   *logrus.Logger
 	Trans ut.Translator
@@ -43,17 +40,8 @@ func GetApp() (*App, error) {
 	uni := ut.New(br, br)
 	trans, _ := uni.GetTranslator("pt_BR")
 	_ = br_translations.RegisterDefaultTranslations(vld, trans)
-	// definindo configurações de ambiente
-	cfg := config.GetConfig()
-	// definindo conexão com o banco de dados
-	db, err := db.GetDB(cfg.GetDBConnStr(), cfg.GetDebugMode())
-	if err != nil {
-		return nil, err
-	}
 
 	return &App{
-		DB:    db,
-		Cfg:   cfg,
 		Vld:   vld,
 		Log:   log,
 		Trans: trans,
